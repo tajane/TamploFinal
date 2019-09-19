@@ -52,8 +52,10 @@ public class TestBase
 		{
 		FileInputStream inputStream = new FileInputStream(ResourceHelper.getResourcePath("src/main/resources/propertiesfile/config.properties"));
 		// TODO Auto-generated constructor stub
+		FileInputStream inputStream2 = new FileInputStream(ResourceHelper.getResourcePath("src/main/resources/propertiesfile/departmentedit.properties"));
 		prob = new Properties();
 		prob.load(inputStream);
+		prob.load(inputStream2);
 		} catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();

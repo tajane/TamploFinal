@@ -1,51 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11067" started-at="2019-09-11T12:47:21Z" finished-at="2019-09-11T12:47:32Z">
+  <suite name="Default suite" duration-ms="12021" started-at="2019-09-19T12:30:54Z" finished-at="2019-09-19T12:31:06Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11067" started-at="2019-09-11T12:47:21Z" finished-at="2019-09-11T12:47:32Z">
-      <class name="com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest">
-        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="beforeSuite" is-config="true" duration-ms="177" started-at="2019-09-11T18:17:21Z" finished-at="2019-09-11T18:17:21Z">
+    <test name="Default test" duration-ms="12021" started-at="2019-09-19T12:30:54Z" finished-at="2019-09-19T12:31:06Z">
+      <class name="com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="beforeSuite" is-config="true" duration-ms="185" started-at="2019-09-19T18:00:54Z" finished-at="2019-09-19T18:00:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="beforeTest" is-config="true" duration-ms="8437" started-at="2019-09-11T18:17:21Z" finished-at="2019-09-11T18:17:30Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="beforeTest" is-config="true" duration-ms="9009" started-at="2019-09-19T18:00:54Z" finished-at="2019-09-19T18:01:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="nevigateToDepartmentPage()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="nevigateToDepartmentPage" is-config="true" duration-ms="1180" started-at="2019-09-11T18:17:30Z" finished-at="2019-09-11T18:17:31Z">
+        <test-method status="PASS" signature="nevigateToDepartmentPage()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="nevigateToDepartmentPage" is-config="true" duration-ms="1832" started-at="2019-09-19T18:01:03Z" finished-at="2019-09-19T18:01:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- nevigateToDepartmentPage -->
-        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="beforemethod" is-config="true" duration-ms="1" started-at="2019-09-11T18:17:31Z" finished-at="2019-09-11T18:17:31Z">
+        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="beforemethod" is-config="true" duration-ms="1" started-at="2019-09-19T18:01:05Z" finished-at="2019-09-19T18:01:05Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest.editDepartmentTestCase() throws java.lang.InterruptedException]]>
+                <![CDATA[public void com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest.editDepartmentTestCase() throws java.lang.InterruptedException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforemethod -->
-        <test-method status="PASS" signature="editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="editDepartmentTestCase" duration-ms="1135" started-at="2019-09-11T18:17:31Z" finished-at="2019-09-11T18:17:32Z">
+        <test-method status="PASS" signature="editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="editDepartmentTestCase" duration-ms="118" started-at="2019-09-19T18:01:05Z" finished-at="2019-09-19T18:01:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- editDepartmentTestCase -->
-        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b]" name="afterMethod" is-config="true" duration-ms="294" started-at="2019-09-11T18:17:32Z" finished-at="2019-09-11T18:17:32Z">
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="afterMethod" is-config="true" duration-ms="342" started-at="2019-09-19T18:01:05Z" finished-at="2019-09-19T18:01:05Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=editDepartmentTestCase status=SUCCESS method=EditDepartmentTest.editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest@3c0ecd4b] output={null}]]]>
+                <![CDATA[[TestResult name=editDepartmentTestCase status=SUCCESS method=RemoveUserFromDepartmentTest.editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-      </class> <!-- com.tamplo.ityss.departmentpagetestcases.EditDepartmentTest -->
+        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="beforemethod" is-config="true" duration-ms="1" started-at="2019-09-19T18:01:05Z" finished-at="2019-09-19T18:01:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest.removeUserFromDprtTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforemethod -->
+        <test-method status="PASS" signature="removeUserFromDprtTest()[pri:1, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="removeUserFromDprtTest" duration-ms="635" started-at="2019-09-19T18:01:05Z" finished-at="2019-09-19T18:01:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- removeUserFromDprtTest -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870]" name="afterMethod" is-config="true" duration-ms="62" started-at="2019-09-19T18:01:06Z" finished-at="2019-09-19T18:01:06Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=removeUserFromDprtTest status=SUCCESS method=RemoveUserFromDepartmentTest.removeUserFromDprtTest()[pri:1, instance:com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest@5f341870] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- com.tamplo.ityss.departmentpagetestcases.RemoveUserFromDepartmentTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
