@@ -1,7 +1,11 @@
 package com.tamplo.ityss.departmentpagetestcases;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -53,7 +57,7 @@ public class RemoveUserFromDepartmentTest extends TestBase
 		
 	}
 	
-	@Test(priority = 1)
+	@Test(priority = 1,enabled=false)
 	public void removeUserFromDprtTest() 
 	{
 	if (count==1) 
@@ -109,5 +113,22 @@ public class RemoveUserFromDepartmentTest extends TestBase
 		   test.log(Status.PASS, MarkupHelper.createLabel("login user having only department read permission so he can't remove user" , ExtentColor.GREY));
 	      }	
 		
+	}
+	
+	@Test(priority=1)
+	public void sample() 
+	{
+		String inputuserrole = "manager";
+		String uppercaseinputuserrole = inputuserrole.toUpperCase();
+		WebElement addbuttonofuser = driver.findElement(By.xpath("//section[@class='projectInfoContentSection']//div[@class='userGroupBlock userAdmin deptUserBlock ng-scope']/h5[contains(@id,'"+uppercaseinputuserrole+"')]/following-sibling::div/div/button[contains(text(),'ADD')]"));
+		addbuttonofuser.click();
+		WebElement sendtext = driver.findElement(By.xpath("//section[@class='projectInfoContentSection']//div[@class='userGroupBlock userAdmin deptUserBlock ng-scope']/h5[contains(@id,'"+uppercaseinputuserrole+"')]/following-sibling::div/div/button[contains(text(),'ADD')]/ancestor::div[@class='projectActionsWidgetContent projectInfoContent ng-scope']/ul/li//input[@type='text']"));
+		sendtext.sendKeys("nitin.tajane@gmail.com");
+		
+	
+				
+		
+		
+	
 	}
 }

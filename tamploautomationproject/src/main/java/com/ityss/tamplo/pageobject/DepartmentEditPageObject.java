@@ -9,6 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.ityss.tamplo.helper.javascript.JavaScriptHelper;
 import com.ityss.tamplo.helper.wait.WaitHelper;
 
@@ -35,6 +39,12 @@ public class DepartmentEditPageObject
 	@FindBy(xpath="//div[@class='swal-footer']/div/button[contains(text(),'OK')]")
 	WebElement okbuttonofswal;
 	
+	@FindBy(xpath="//button[@class='btn verysmall btn-primary ng-binding'][contains(text(),'Save')]")
+	WebElement  savebuttonofuser;
+	
+	@FindBy(xpath="//button[@class='btn verysmall btn-link ng-binding'][contains(text(),'Cancel')]")
+	WebElement  cancelbuttonofuser;
+		
 	private String editbuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'EDIT')]";
 	private String deletebuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'REMOVE')]";
 	private String deactivatebuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'DEACTIVATE')]";
@@ -210,7 +220,98 @@ public class DepartmentEditPageObject
 	   WebElement userremovebtn = UserSectionDiv(usernametoremove).findElement(By.xpath("./ancestor::li//div[@class='actiontool ng-scope']/span[@ng-if='departmentUserListType.writePermission']/div/ul/li/a[contains(text(),'REMOVE')]"));
 	   JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
 	   javaScriptHelper.clickOnElement(userremovebtn);
-
    }
    
+  
+   public String userRolePath(String inputuserrole) 
+   {
+	String uppercaseinputuserrole = inputuserrole.toUpperCase();
+	String actualpathofuserole = "//section[@class='projectInfoContentSection']//div[@class='userGroupBlock userAdmin deptUserBlock ng-scope']/h5[contains(@id,'"+uppercaseinputuserrole+"')]";
+	return actualpathofuserole;
+   }
+   
+   public WebElement userRoleSectionElement(String inputuserrole) 
+   {
+	
+	WebElement userroletitle = driver.findElement(By.xpath(userRolePath(inputuserrole)));
+	return userroletitle;
+   }
+   
+   public boolean userRoleTitlePresentOrNot(ExtentTest test,String inputuserrole) 
+   {
+	   List<WebElement> userroledisplay = driver.findElements(By.xpath(userRolePath(inputuserrole)));
+	   if (userroledisplay.size() > 0 && userroledisplay.size() < 2) 
+	   {
+		test.log(Status.PASS, MarkupHelper.createLabel("user role available" , ExtentColor.GREEN));
+		return true;
+		
+	  } else 
+	  {
+		  test.log(Status.PASS, MarkupHelper.createLabel("user role not available or more user role present with similar name" , ExtentColor.RED));
+		  return false;
+	  }  
+   }
+   
+   public boolean checkAddUserButtonPresentOrNot(ExtentTest test, String inputuserrole) 
+   {
+	   List<WebElement> adduserrolebutton = userRoleSectionElement(inputuserrole).findElements(By.xpath("./following-sibling::div/div/button[contains(text(),'ADD')]"));
+	   if (adduserrolebutton.size() > 0 && adduserrolebutton.size() < 2) 
+	   {
+		test.log(Status.PASS, MarkupHelper.createLabel("user having add permission" , ExtentColor.GREEN));
+		return true;
+		
+	  } else 
+	  {
+		  test.log(Status.PASS, MarkupHelper.createLabel("user role not having add permission" , ExtentColor.RED));
+		  return false;
+	  }  
+   }
+   
+   public void clickOnAddUserRoleButton(String inputuserrole) 
+   {
+	WebElement addbutton = userRoleSectionElement(inputuserrole).findElement(By.xpath("./following-sibling::div/div/button[contains(text(),'ADD')]"));   
+	JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+	javaScriptHelper.clickOnElement(addbutton);
+   }
+   
+   public void enterUserEmailIdIntoText(String inputuserrole,String enteruseremailid) 
+   {
+	   WebElement addbutton = userRoleSectionElement(inputuserrole).findElement(By.xpath("./following-sibling::div/div/button[contains(text(),'ADD')]/ancestor::div[@class='projectActionsWidgetContent projectInfoContent ng-scope']/ul/li//input[@type='text']"));
+       addbutton.sendKeys(enteruseremailid);
+	   
+   }
+   
+   public boolean checkChoiceUserListedOrNot(String inputuserrole,String enteruseremailid) 
+   {
+	   List<WebElement> userpresentinlist = userRoleSectionElement(inputuserrole).findElements(By.xpath("./ancestor::div[1]//ul[@class='employeeList']/li/span[2]/span[contains(text(),'"+enteruseremailid+"')]"));
+	   if (userpresentinlist.size() > 0 && userpresentinlist.size() < 2) 
+	   {
+		return true;
+		
+	  } else 
+	  {
+		  return false;
+	  }
+   }
+   
+   public void selectChoiceUserFromList(String inputuserrole,String enteruseremailid) 
+   {
+	   WebElement addbutton = userRoleSectionElement(inputuserrole).findElement(By.xpath("./ancestor::div[1]//ul[@class='employeeList']/li/span[2]/span[contains(text(),'"+enteruseremailid+"')]"));
+       JavaScriptHelper javaScriptHelper =  new JavaScriptHelper(driver);
+       javaScriptHelper.clickOnElement(addbutton);
+   }
+   
+   public void clickOnSaveButtonOfUser() throws InterruptedException 
+   {
+	   
+	   JavaScriptHelper javaScriptHelper =  new JavaScriptHelper(driver);
+       javaScriptHelper.clickOnElement(savebuttonofuser);
+   }
+   
+   public void clickOnCancelButtonOfUser() throws InterruptedException 
+   {
+	  
+	   JavaScriptHelper javaScriptHelper =  new JavaScriptHelper(driver);
+       javaScriptHelper.clickOnElement(cancelbuttonofuser);
+   }
 }
