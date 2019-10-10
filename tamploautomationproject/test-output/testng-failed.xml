@@ -3,16 +3,16 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest">
+      <class name="com.tamplo.ityss.projectpagetestcases.CreateMilestoneTest">
         <methods>
           <include name="beforemethod"/>
-          <include name="nevigateToDepartmentPage"/>
           <include name="beforeSuite"/>
           <include name="beforeTest"/>
           <include name="afterMethod"/>
-          <include name="addUserIntoDprtTest"/>
+          <include name="AddMilestoneTest"/>
+          <include name="nevigateToProjectPage"/>
         </methods>
-      </class> <!-- com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest -->
+      </class> <!-- com.tamplo.ityss.projectpagetestcases.CreateMilestoneTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

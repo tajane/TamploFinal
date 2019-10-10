@@ -1,77 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="22592" started-at="2019-10-03T12:31:19Z" finished-at="2019-10-03T12:31:42Z">
+  <suite name="Default suite" duration-ms="33949" started-at="2019-10-09T10:10:53Z" finished-at="2019-10-09T10:11:27Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="22592" started-at="2019-10-03T12:31:19Z" finished-at="2019-10-03T12:31:42Z">
-      <class name="com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest">
-        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="beforeSuite" is-config="true" duration-ms="215" started-at="2019-10-03T18:01:19Z" finished-at="2019-10-03T18:01:19Z">
+    <test name="Default test" duration-ms="33949" started-at="2019-10-09T10:10:53Z" finished-at="2019-10-09T10:11:27Z">
+      <class name="com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="beforeSuite" is-config="true" duration-ms="160" started-at="2019-10-09T15:40:53Z" finished-at="2019-10-09T15:40:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="beforeTest" is-config="true" duration-ms="18984" started-at="2019-10-03T18:01:19Z" finished-at="2019-10-03T18:01:38Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="beforeTest" is-config="true" duration-ms="12045" started-at="2019-10-09T15:40:53Z" finished-at="2019-10-09T15:41:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="nevigateToDepartmentPage()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="nevigateToDepartmentPage" is-config="true" duration-ms="1395" started-at="2019-10-03T18:01:38Z" finished-at="2019-10-03T18:01:39Z">
+        <test-method status="PASS" signature="nevigateToProjectPage()[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="nevigateToProjectPage" is-config="true" duration-ms="21586" started-at="2019-10-09T15:41:05Z" finished-at="2019-10-09T15:41:26Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- nevigateToDepartmentPage -->
-        <test-method status="PASS" signature="editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="editDepartmentTestCase" duration-ms="142" started-at="2019-10-03T18:01:39Z" finished-at="2019-10-03T18:01:40Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- editDepartmentTestCase -->
-        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="beforemethod" is-config="true" duration-ms="0" started-at="2019-10-03T18:01:39Z" finished-at="2019-10-03T18:01:39Z">
+        </test-method> <!-- nevigateToProjectPage -->
+        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="beforemethod" is-config="true" duration-ms="1" started-at="2019-10-09T15:41:26Z" finished-at="2019-10-09T15:41:26Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest.editDepartmentTestCase() throws java.lang.InterruptedException]]>
+                <![CDATA[public void com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest.addUserStoryTest() throws java.lang.InterruptedException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforemethod -->
-        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="afterMethod" is-config="true" duration-ms="345" started-at="2019-10-03T18:01:40Z" finished-at="2019-10-03T18:01:40Z">
+        <test-method status="PASS" signature="addUserStoryTest()[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="addUserStoryTest" duration-ms="9" started-at="2019-10-09T15:41:26Z" finished-at="2019-10-09T15:41:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserStoryTest -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870]" name="afterMethod" is-config="true" duration-ms="288" started-at="2019-10-09T15:41:26Z" finished-at="2019-10-09T15:41:27Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=editDepartmentTestCase status=SUCCESS method=AddUserIntoDepartmentTest.editDepartmentTestCase()[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870] output={null}]]]>
+                <![CDATA[[TestResult name=addUserStoryTest status=SUCCESS method=CreateUserStoryTest.addUserStoryTest()[pri:0, instance:com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest@5f341870] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="addUserIntoDprtTest()[pri:1, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="addUserIntoDprtTest" duration-ms="1652" started-at="2019-10-03T18:01:40Z" finished-at="2019-10-03T18:01:42Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- addUserIntoDprtTest -->
-        <test-method status="PASS" signature="beforemethod(java.lang.reflect.Method)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="beforemethod" is-config="true" duration-ms="0" started-at="2019-10-03T18:01:40Z" finished-at="2019-10-03T18:01:40Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest.addUserIntoDprtTest() throws java.lang.InterruptedException]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforemethod -->
-        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870]" name="afterMethod" is-config="true" duration-ms="46" started-at="2019-10-03T18:01:42Z" finished-at="2019-10-03T18:01:42Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=addUserIntoDprtTest status=SUCCESS method=AddUserIntoDepartmentTest.addUserIntoDprtTest()[pri:1, instance:com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest@5f341870] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterMethod -->
-      </class> <!-- com.tamplo.ityss.departmentpagetestcases.AddUserIntoDepartmentTest -->
+      </class> <!-- com.tamplo.ityss.projectpagetestcases.CreateUserStoryTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

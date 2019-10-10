@@ -44,11 +44,19 @@ public class DepartmentEditPageObject
 	
 	@FindBy(xpath="//button[@class='btn verysmall btn-link ng-binding'][contains(text(),'Cancel')]")
 	WebElement  cancelbuttonofuser;
+	
+	@FindBy(xpath="//label[contains(text(),'INACTIVE')]")
+	WebElement deactivatedpeartment;
 		
 	private String editbuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'EDIT')]";
 	private String deletebuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'REMOVE')]";
 	private String deactivatebuttonofdprtlink =".//div[1]/ul[1]/li/a[contains(text(),'DEACTIVATE')]";
 	
+	public void openDeActivatedDepartmentList() 
+	{
+		JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+		javaScriptHelper.clickOnElement(deactivatedpeartment);
+	}
 	
 	public DepartmentEditPageObject(WebDriver driver) 
 	{
@@ -76,12 +84,18 @@ public class DepartmentEditPageObject
 	
 	public void clickOnConfirmBtnofSwal() 
 	{
+		WaitHelper waitforelement = new WaitHelper(driver);
+		waitforelement.waitForVisibilityOfElmentWithPollingTime(20, 05, confirmbuttonofswal);
+		
 		JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
 		javaScriptHelper.clickOnElement(confirmbuttonofswal);
 	}
 	
 	public void clickOnOkBtnofSwal() 
 	{
+		WaitHelper waitforelement = new WaitHelper(driver);
+		waitforelement.waitForVisibilityOfElmentWithPollingTime(20, 05, okbuttonofswal);
+		
 		JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
 		javaScriptHelper.clickOnElement(okbuttonofswal);
 	}
@@ -97,7 +111,6 @@ public class DepartmentEditPageObject
 		{
 			return false;
 		}
-		
 	}
 	
 	public void clickOnEditButtonOfDepartment(String departmentname) 
@@ -313,5 +326,18 @@ public class DepartmentEditPageObject
 	  
 	   JavaScriptHelper javaScriptHelper =  new JavaScriptHelper(driver);
        javaScriptHelper.clickOnElement(cancelbuttonofuser);
+   }
+   
+   public boolean checkDeactivatedDprtListedInDeactiveSection(String departmentname) 
+   {
+	List<WebElement> dpeartmentnameelement = driver.findElements(By.xpath("//section[@class='tamplo-PageContent']/div[2]/div[@class='item createdItem tamplo-panelWrapper ng-scope']//h3[contains(text(),'"+departmentname+"')]"));
+	
+	 if (dpeartmentnameelement.size() > 0 && dpeartmentnameelement.size() < 2) 
+	  {
+		return true;
+	  } else 
+	  {
+		return false;
+	  }
    }
 }

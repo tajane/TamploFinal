@@ -115,20 +115,5 @@ public class RemoveUserFromDepartmentTest extends TestBase
 		
 	}
 	
-	@Test(priority=1)
-	public void sample() 
-	{
-		String inputuserrole = "manager";
-		String uppercaseinputuserrole = inputuserrole.toUpperCase();
-		WebElement addbuttonofuser = driver.findElement(By.xpath("//section[@class='projectInfoContentSection']//div[@class='userGroupBlock userAdmin deptUserBlock ng-scope']/h5[contains(@id,'"+uppercaseinputuserrole+"')]/following-sibling::div/div/button[contains(text(),'ADD')]"));
-		addbuttonofuser.click();
-		WebElement sendtext = driver.findElement(By.xpath("//section[@class='projectInfoContentSection']//div[@class='userGroupBlock userAdmin deptUserBlock ng-scope']/h5[contains(@id,'"+uppercaseinputuserrole+"')]/following-sibling::div/div/button[contains(text(),'ADD')]/ancestor::div[@class='projectActionsWidgetContent projectInfoContent ng-scope']/ul/li//input[@type='text']"));
-		sendtext.sendKeys("nitin.tajane@gmail.com");
-		
 	
-				
-		
-		
-	
-	}
 }
