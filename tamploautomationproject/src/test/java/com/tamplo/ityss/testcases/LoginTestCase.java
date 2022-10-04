@@ -26,8 +26,7 @@ public class LoginTestCase extends TestBase
 		LoginPageObject loginpageobject = new LoginPageObject(driver);
 		DashboardPageObject dashboardagebject = new DashboardPageObject(driver);
 		
-		loginpageobject.login(prob.getProperty("username"), prob.getProperty("password"));
-		test.log(Status.PASS, MarkupHelper.createLabel("user login into application", ExtentColor.GREEN));
+		
 		
 		
 		String selectedcompnay = dashboardagebject.setCompany(prob.getProperty("company"));
