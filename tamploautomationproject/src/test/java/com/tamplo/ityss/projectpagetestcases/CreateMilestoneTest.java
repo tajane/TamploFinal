@@ -20,6 +20,7 @@ public class CreateMilestoneTest extends TestBase
 	ProjectPageObject projectpageobject;
 	MilestonePageObject milestonepageobject;
 	SelectDueDateForAction milestonedates;
+	String milestonename;
 	
 	int count=0;
 	
@@ -31,6 +32,8 @@ public class CreateMilestoneTest extends TestBase
 		milestonepageobject = new MilestonePageObject(driver);
 		milestonedates =new  SelectDueDateForAction(driver);
 		
+		String projectname = prob.getProperty("projectforaddmilestone");
+		milestonename = prob.getProperty("milestonename");
 		
 		dashboardagebject.openProjectPage();
 		test.log(Status.PASS, MarkupHelper.createLabel(" Project page open successfully ", ExtentColor.BROWN));
@@ -38,7 +41,7 @@ public class CreateMilestoneTest extends TestBase
 		
 		//boolean isprojectpresent = projectpageobject.clickOnInputProjectInLeftSide(prob.getProperty("projectforaddmilestone"),test);
 		
-		boolean isprojectpresent = projectpageobject.selectProjectInGridView(prob.getProperty("projectforaddmilestone"));
+		boolean isprojectpresent = projectpageobject.selectProjectInGridView(projectname);
 		
 		if (!isprojectpresent) 
 		{
@@ -48,7 +51,7 @@ public class CreateMilestoneTest extends TestBase
 		if (isprojectpresent) 
 		{
 		
-		test.log(Status.PASS, MarkupHelper.createLabel(prob.getProperty("projectforaddmilestone") + " : this Project select successfully", ExtentColor.GREEN));
+		test.log(Status.PASS, MarkupHelper.createLabel(projectname + " : this Project select successfully", ExtentColor.GREEN));
 		
 		boolean ispresnt =milestonepageobject.checkIfMileStoneLabelPresentOrNot();
 		test.log(Status.PASS, MarkupHelper.createLabel( " Milestone label is present : " +  ispresnt, ExtentColor.GREEN));
@@ -80,7 +83,8 @@ public class CreateMilestoneTest extends TestBase
 		
 		} else 
 		{
-			test.log(Status.PASS, MarkupHelper.createLabel("Project not listed project list or project not added", ExtentColor.RED));
+			test.log(Status.PASS, MarkupHelper.createLabel("Project not listed in project list or project not added", ExtentColor.RED));
+			count  = 1;
 		}
 	}
 	
@@ -95,7 +99,7 @@ public class CreateMilestoneTest extends TestBase
 		milestonepageobject.clickOnAddMilestoneBtn();
 		test.log(Status.PASS, MarkupHelper.createLabel("click  on add milestone button", ExtentColor.GREEN));
 		
-		boolean istitleenter = milestonepageobject.enterMilestoneTitle("automation milestone",test);
+		boolean istitleenter = milestonepageobject.enterMilestoneTitle(milestonename,test);
 		
 		if (istitleenter) 
 		{
@@ -125,7 +129,7 @@ public class CreateMilestoneTest extends TestBase
 		
 		}else 
 		{
-			test.log(Status.PASS, MarkupHelper.createLabel("Please contact to admin to get access rights of milestone", ExtentColor.BLUE));	
+			test.log(Status.PASS, MarkupHelper.createLabel("Please contact to admin to get access rights of milestone or project not exist", ExtentColor.BLUE));	
 		}
 		
 		

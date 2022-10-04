@@ -2,7 +2,9 @@ package com.ityss.tamplo.pageobject;
 
 import java.util.List;
 
+import org.apache.regexp.recompile;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,11 +29,20 @@ public class ProjectPageObject
 	@FindBy(xpath="//button[@class='btn verysmall btn-primary ng-binding'][contains(text(),'NEW PROJECT')]")
 	WebElement addnewprojectbutton;
 	
+	@FindBy(xpath="//button[@class='btn verysmall btn-primary ng-binding'][contains(text(),'NEW PROJECT')]")
+	List<WebElement> listofaddnewprojectbutton;
+	
 	@FindBy(xpath="//a[@class='dropbtn option ng-binding ng-scope'][contains(text(),'SELECT DEPARTMENT')]")
 	WebElement selectdepartmentdropdownbox;
 	
 	@FindBy(xpath="//a[contains(text(),'DEPARTMENTS')]/ancestor::li[1]/following-sibling::li[@ng-if='loggedInData.company.status <= 20']/ul[1]/li")
 	List<WebElement> howmanydepartment;
+	
+	@FindBy(xpath="//div[@class='projectsPageContainer zeroState']//button[@class='btn small btn-primary ng-binding']")
+	WebElement addprojectzerostate;
+	
+	@FindBy(xpath="//div[@class='projectsPageContainer zeroState']//button[@class='btn small btn-primary ng-binding']")
+	List<WebElement> listofaddprojectzerostate;
 	
 	// this will be use for create project if one project no need to click on drop down if multiple project then click on drop down
 	
@@ -77,6 +88,44 @@ public class ProjectPageObject
 	@FindBy(xpath="//div[@class='projectsPageContainer']//div[@class='item createdItem tamplo-panelWrapper ng-scope']")
 	List<WebElement> listofprojectincontainer;
 	
+	@FindBy(xpath="//button[@class='btn verysmall btn-primary ng-binding'][contains(text(),'Save')]")
+	WebElement  savebuttonofuser;
+	
+	@FindBy(xpath="//button[@class='btn verysmall btn-link ng-binding'][contains(text(),'Cancel')]")
+	WebElement  cancelbuttonofuser;
+	
+	@FindBy(xpath="//div[@class='swal-footer']/div/button[contains(text(),'OK')]")
+	WebElement okbuttonofswal;
+	
+	@FindBy(xpath="//div[@class='projectInfoContentHeaderDepartment']/span/label[1][@class='navbarItemLabel ng-binding']")
+	WebElement onlyonedprtpresentelement;
+	
+	public void clickOnAddProjectZeroState() 
+	{
+		JavaScriptHelper scripthelper = new JavaScriptHelper(driver);
+		scripthelper.clickOnElement(addprojectzerostate);
+		
+	}
+	
+	public void clickOnOkBtnofSwal() 
+	{
+		WaitHelper waitforelement = new WaitHelper(driver);
+		waitforelement.waitForVisibilityOfElmentWithPollingTime(20, 05, okbuttonofswal);
+		
+		JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+		javaScriptHelper.clickOnElement(okbuttonofswal);
+	}
+	
+	public void clickOnSaveButtonOfUserForm() {
+		JavaScriptHelper scripthelper = new JavaScriptHelper(driver);
+		scripthelper.clickOnElement(savebuttonofuser);
+	}
+	
+    public void clickOnCancelButtonOfUserForm() {
+    	JavaScriptHelper scripthelper = new JavaScriptHelper(driver);
+		scripthelper.clickOnElement(cancelbuttonofuser);
+	}
+
 	public boolean clickOnInputProjectInLeftSide(String inputprojectname,ExtentTest test) 
 	{
 		int  count=0;
@@ -130,9 +179,16 @@ public class ProjectPageObject
 	{
 		if (listofprojectincontainer.size() > 0) 
 		{
-		WebElement exactprojectlocation = projectGridContainerElement().findElement(By.xpath("./header/h3/a[contains(text(),'"+enterprojectname+"')]"));
-		exactprojectlocation.click();
-		return true;
+			try 
+			{
+				WebElement exactprojectlocation = projectGridContainerElement().findElement(By.xpath("./header/h3/a[contains(text(),'"+enterprojectname+"')]"));
+				exactprojectlocation.click();
+				return true;
+			} catch (NoSuchElementException e) 
+			{
+				return false;
+			}
+		
 		
 		}else 
 		{
@@ -142,33 +198,89 @@ public class ProjectPageObject
 	
 	public void addProjectButton() 
 	{
-		addnewprojectbutton.click();
+		JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+		javaScriptHelper.clickOnElement(addnewprojectbutton);
+		
 	}
 	
-	public void enterProjectName(String departmentname, String inputprojecttitle) 
+	public boolean checkAddProjectPermission() 
 	{
-		if (howmanydepartment.size()>1) 
+				
+		if (listofaddnewprojectbutton.size() > 0 && listofaddnewprojectbutton.size() < 2) 
 		{
+			addProjectButton();
+			return true;
+			
+		} else if (listofaddprojectzerostate.size() > 0  && listofaddprojectzerostate.size() < 2) 
+		{	
+			clickOnAddProjectZeroState();
+			return true;		
+		}else 
+		{
+			return false;	
+		} 	
+	}
+	
+	public boolean selectDepartmentFromList(String departmentname) 
+	{
+		
+		int dprtcount = howmanydepartment.size();
+		if (dprtcount>1) 
+		{
+			
 			selectdepartmentdropdownbox.click();
 			int countofdepartment = listofdepartment.size();
 			for (int i = 1; i <= countofdepartment; i++) 
 			{
+				
 				WebElement eachdepartmentname =  driver.findElement(By.xpath("//a[@class='dropbtn option ng-binding ng-scope'][contains(text(),'SELECT DEPARTMENT')]/following-sibling::div[1]/ul[1]/li["+i+"]"));
 			    String getdepartmentname =  eachdepartmentname.getText();
 			    if (getdepartmentname.equalsIgnoreCase(departmentname)) 
 			    {
 			    	eachdepartmentname.click();
-			    	
-			    	WaitHelper waitHelper = new WaitHelper(driver);
-			    	waitHelper.waitForVisibilityOfElmentWithPollingTime(20, 05, projectnametextfield);
-			    	projectnametextfield.sendKeys(inputprojecttitle);
-			    	break;
+			    	return true;
+			    		
+				}else 
+				{
+					if (i>=countofdepartment) 
+					{
+						break;
+					}else 
+					{
+						continue;
+					}
+					
 				}
+			   
+			    
 			}
+			
+		} else if(dprtcount==1)
+		{
+		
+		    String getdepartmentname =  onlyonedprtpresentelement.getText();
+		    if (getdepartmentname.equalsIgnoreCase(departmentname)) 
+		    {
+		    	return true;
+		    		
+			}else 
+			{
+				return false;
+			}
+			
 		}else 
 		{
-			projectnametextfield.sendKeys(inputprojecttitle);
+			System.out.println("some other error ");
+			return false;
 		}
+	return false;	
+	}
+	
+	public void enterProjectName(String inputprojecttitle) 
+	{
+		WaitHelper waitHelper = new WaitHelper(driver);
+    	waitHelper.waitForVisibilityOfElmentWithPollingTime(20, 05, projectnametextfield);
+    	projectnametextfield.sendKeys(inputprojecttitle);
 	}
 
 	 public boolean checkNewProjectOrDuplicateProject() 
@@ -207,73 +319,74 @@ public class ProjectPageObject
 	    okbutton.click();
     }
 
-    public void addProjectMemberBtn() 
+    private String userRoleTitleElement(String rolename) 
     {
-    	WaitHelper waitHelper = new WaitHelper(driver);
-	    waitHelper.waitForVisibilityOfElmentWithPollingTime(20, 05, addprojectmemberbutton);
-    	addprojectmemberbutton.click();
+    	String inputrolename = rolename.toUpperCase();
+		String elementofuserole ="//section[@class='projectInfoContentSection ng-scope']//div[@class='userSection ng-scope']//h5[@id='"+inputrolename+"']";
+	    return elementofuserole;
     }
     
-    public void addProjectManagerBtn() 
+    public boolean checkUserRolePresentOrNot(String rolename) 
     {
-    	WaitHelper waitHelper = new WaitHelper(driver);
-	    waitHelper.waitForVisibilityOfElmentWithPollingTime(20, 05, addprojectmanagerbutton);
-   	   addprojectmanagerbutton.click();
-    }
-    
-    public void enterUserAndAddUser(String useremail) throws InterruptedException 
-    {
-    	try 
-    	{
-    		
-    		enterprojectuseremailattopside.sendKeys(useremail);
-    		selectUserAndSaveItTopPosition();
-		} catch (Exception e) 
-    	{
-			
-			enterprojectuseremailatbottomside.sendKeys(useremail);
-			selectUserAndSaveItBottomPosition();
-		}
-	
-    }
-    
-    public void selectUserAndSaveItTopPosition() 
-    {
-    	try 
-    	{
-    	selectfirstuserfromtopside.click();
-    	savebuttontopposition.click();
-    	} catch (Exception e) 
-    	{
-    		savebuttontopposition.click();
-    		WebElement swaltitleusercheck = driver.findElement(By.xpath("//div[@class='swal-title']"));
-			String getswaltitle = swaltitleusercheck.getText();
-			if (getswaltitle.contentEquals("Already added to this project.")) 
-			{
-				System.out.println("user already added");
-			    clickOnOKbtn();	 
-			}
-    	}
+	 List<WebElement> isroleprentelement = driver.findElements(By.xpath(userRoleTitleElement(rolename)));	
+	  if (isroleprentelement.size() > 0 && isroleprentelement.size() < 2 ) 
+	  {
+		return true;
+	  } else 
+	  {
+		return false;
+	  }
 	}
     
-    public void selectUserAndSaveItBottomPosition() throws InterruptedException 
-    {	
-    	try 
-    	{
-    		selectfirstuserfrombottomside.click();
-        	savebuttonbottomposition.click();
-      	
-		} catch (Exception e) 
-    	{
-			savebuttonbottomposition.click();
-			WebElement swaltitleusercheck = driver.findElement(By.xpath("//div[@class='swal-title']"));
-			String getswaltitle = swaltitleusercheck.getText();
-			if (getswaltitle.contentEquals("Already added to this project.")) 
-			{
-				System.out.println("user already added");
-			    clickOnOKbtn();	 
-			}
-		}
-    	
+    public boolean checkAddUserPresentOrNot(String rolename) 
+    {
+    	WebElement usersectionelement = driver.findElement(By.xpath(userRoleTitleElement(rolename)));
+  	  List<WebElement> addbtnelement = usersectionelement.findElements(By.xpath("./ancestor::div[2]//button[text()='ADD "+rolename+"']"));
+  	  int sizeofelement = addbtnelement.size();
+  	  if (sizeofelement > 0 && sizeofelement < 2 ) 
+	  {
+		return true;
+	  } else 
+	  {
+		return false;
+	  }
 	}
+    
+    public void clickOnAddButtonOfUserRole(String rolename) 
+    {
+	  WebElement usersectionelement = driver.findElement(By.xpath(userRoleTitleElement(rolename)));
+	  WebElement addbtnelement = usersectionelement.findElement(By.xpath("./ancestor::div[2]//button[text()='ADD "+rolename+"']"));
+	  JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+	  javaScriptHelper.clickOnElement(addbtnelement);
+    }
+    
+ public void enterUserEmailId(String rolename,String useremailid) 
+ {
+	 WebElement usersectionelement = driver.findElement(By.xpath(userRoleTitleElement(rolename)));
+	 WebElement textfieldelement = usersectionelement.findElement(By.xpath("./ancestor::div[2]/div[1]//div[@class='projectActionsWidgetContent projectInfoContent ng-scope']//input[@type='text']"));
+	 textfieldelement.sendKeys(useremailid);
+ }
+   
+ public boolean checkThatUserPresentInListOrNot(String rolename,String useremailid) 
+ {
+	 WebElement usersectionelement = driver.findElement(By.xpath(userRoleTitleElement(rolename)));
+	 List<WebElement> textfieldelement = usersectionelement.findElements(By.xpath("./ancestor::div[2]/div[1]//ul[@class='employeeList']/li/span[2]/span[contains(text(),'"+useremailid+"')]"));
+	 if (textfieldelement.size() > 0 && textfieldelement.size() < 2) 
+	   {
+		return true;
+		
+	  } else 
+	  {
+		  return false;
+	  }
+  }
+   
+ public void selectChoiceUserFromList(String rolename,String useremailid) 
+ {
+	 WebElement usersectionelement = driver.findElement(By.xpath(userRoleTitleElement(rolename)));
+	 WebElement textfieldelement = usersectionelement.findElement(By.xpath("./ancestor::div[2]/div[1]//ul[@class='employeeList']/li/span[2]/span[contains(text(),'"+useremailid+"')]"));
+ 
+	 JavaScriptHelper javaScriptHelper = new JavaScriptHelper(driver);
+	  javaScriptHelper.clickOnElement(textfieldelement);
+ }
 }

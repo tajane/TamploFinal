@@ -22,6 +22,8 @@ public class CreateUserStoryTest extends TestBase
 	ProjectPageObject projectpageobject;
 	UserStoryPageObject  userstorypageobject;
 	int count=0;
+	String projectname = prob.getProperty("projecttoadduserstories");
+	String userstoryname = prob.getProperty("userstoryname");
 	
 	@BeforeClass
 	public void nevigateToProjectPage() throws IOException
@@ -33,8 +35,9 @@ public class CreateUserStoryTest extends TestBase
 		dashboardagebject.openProjectPage();
 		test.log(Status.PASS, MarkupHelper.createLabel(" Project page open successfully ", ExtentColor.BROWN));
 		
-		//projectpageobject.clickOnInputProjectInLeftSide("Wrkld project telling");
-		projectpageobject.clickOnInputProjectInLeftSide(prob.getProperty("projecttoadduserstories"),test);
+		boolean isprojectpresent = projectpageobject.selectProjectInGridView(projectname);
+		if (isprojectpresent) 
+		{
 		test.log(Status.PASS, MarkupHelper.createLabel(" Project select successfully", ExtentColor.GREEN));
 		
 		boolean ispresnt =userstorypageobject.checkIfUserStoryLabelPresentOrNot();
@@ -61,13 +64,18 @@ public class CreateUserStoryTest extends TestBase
 		else 
 		{
 			test.log(Status.PASS, MarkupHelper.createLabel("Login user does not have right to access user story page", ExtentColor.RED));
-			count  = 1;
-			
+			count  = 1;	
+		}
+		
+		} else 
+		{
+			test.log(Status.PASS, MarkupHelper.createLabel("Project not listed in project list or project not added", ExtentColor.RED));
+			count  = 1;	
 		}
 	}
 	
-	@Test(dataProvider="userstorydata")
-	public  void addUserStoryTest(String storytitle,String storydescription) throws InterruptedException
+	@Test()
+	public  void addUserStoryTest() throws InterruptedException
 	{
 		if (count==0) 
 		{
@@ -77,22 +85,22 @@ public class CreateUserStoryTest extends TestBase
 		userstorypageobject.clickOnAddUserStoryButton();
 		test.log(Status.PASS, MarkupHelper.createLabel("click  on add user story button", ExtentColor.GREEN));
 		
-		userstorypageobject.enterAllDetailsAndSaveStory(storytitle,storydescription,test);
+		userstorypageobject.enterAllDetailsAndSaveStory(userstoryname,"story descritoon",test);
 		
 		int userstorycountafter = userstorypageobject.getUserStoryCount(); 
 		test.log(Status.PASS, MarkupHelper.createLabel("list of user story after adding new one count is : " + userstorycountafter, ExtentColor.GREEN));
 		
 		}else 
 		{
-			test.log(Status.PASS, MarkupHelper.createLabel("Please contact to admin to get access rights of user story", ExtentColor.BLUE));	
+			test.log(Status.PASS, MarkupHelper.createLabel("Please contact to admin to get access rights of user story or project not exist", ExtentColor.BLUE));	
 		}
 	}
 	
 	
-	@DataProvider(name="userstorydata")
+	/*@DataProvider(name="userstorydata")
 	public Object[][] getExcelData() throws EncryptedDocumentException, Exception
 	{
 		Object data[][] = ExcelHelper.getExcelData("userstorydata");
 		return data;
-	}
+	}*/
 }

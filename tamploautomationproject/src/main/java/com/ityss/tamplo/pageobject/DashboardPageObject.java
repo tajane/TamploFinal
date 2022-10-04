@@ -90,6 +90,7 @@ public class DashboardPageObject
 	
 	public String setCompany(String expected) 
 	{
+		
 		String companyname = null;
 		WaitHelper waitHelper =  new WaitHelper(driver);
 		waitHelper.waitUntilElmentToBeClickable(20, 05, locatecompanybox);

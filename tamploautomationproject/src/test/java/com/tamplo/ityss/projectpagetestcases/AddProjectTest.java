@@ -49,36 +49,105 @@ public class AddProjectTest  extends TestBase
 	@Test
 	public void createProjectTest() throws InterruptedException
 	{
+		String rolenname = prob.getProperty("newuserroletoadduser");
+		String departmentname = prob.getProperty("departmenttoaddproject");
+		String newprojectname = prob.getProperty("newprojectname");
+		String useremailid = prob.getProperty("newprojectusers");
 		
-		projectpageobject.addProjectButton();
+		boolean  isprojectaddpermission = projectpageobject.checkAddProjectPermission();
+		test.log(Status.PASS, MarkupHelper.createLabel("does user having add project permission : " + isprojectaddpermission, ExtentColor.GREEN));
 		
-		projectpageobject.enterProjectName("worload dprt", "automation teesting");
-		
-		projectpageobject.clickOnOutSideToSaveProject();
-		
-		boolean isnewprojectcreated = projectpageobject.checkNewProjectOrDuplicateProject();
-		
-		if (isnewprojectcreated) 
+		if (isprojectaddpermission) 
 		{
-			Thread.sleep(500);
 			
-			projectpageobject.addProjectMemberBtn();
+			boolean isdprtpresent = projectpageobject.selectDepartmentFromList(departmentname);
 			
-			projectpageobject.enterUserAndAddUser("nitin.tajane@tutanota.com");
+			if (isdprtpresent) 
+			{
 			
-			projectpageobject.clickOnOKbtn();
+			projectpageobject.enterProjectName(newprojectname);	
 			
-			projectpageobject.addProjectManagerBtn();
+			test.log(Status.PASS, MarkupHelper.createLabel(" project name enter successfully ", ExtentColor.GREEN));
 			
-			projectpageobject.enterUserAndAddUser("nitin.tajane@protonmail.com");
+			projectpageobject.clickOnOutSideToSaveProject();
 			
-			projectpageobject.clickOnOKbtn();
+			boolean isnewprojectcreated = projectpageobject.checkNewProjectOrDuplicateProject();
 			
-		}else 
-		{
-			System.out.println("we found duplicate project");
-		}
+			
+			if (isnewprojectcreated) 
+			{
+				test.log(Status.PASS, MarkupHelper.createLabel(" project create successfully ", ExtentColor.GREEN));
+				Thread.sleep(500);
+				
+				
+				
+				boolean  userrolepresentornot = projectpageobject.checkUserRolePresentOrNot(rolenname);
+				
+				if (userrolepresentornot) 
+				{
+					test.log(Status.PASS, MarkupHelper.createLabel(rolenname + " : this user role  present in user section ", ExtentColor.GREEN));
+					
+					boolean isaddpermissionpresentornot = projectpageobject.checkAddUserPresentOrNot(rolenname);
+					if (isaddpermissionpresentornot) 
+					{
+						
+						String[] alluseraftersorting= useremailid.split(",");
+						for (String singleuser : alluseraftersorting) 
+						{
+						  projectpageobject.clickOnAddButtonOfUserRole(rolenname);
+						  test.log(Status.PASS, MarkupHelper.createLabel(" click on add button of user ", ExtentColor.BROWN));
+						
+						  projectpageobject.enterUserEmailId(rolenname,singleuser);
+						  test.log(Status.PASS, MarkupHelper.createLabel(" Email id enter successfully ", ExtentColor.GREEN));
+						
+						  boolean isuserpresent = projectpageobject.checkThatUserPresentInListOrNot(rolenname,singleuser);
+						
+						  
+						  if (isuserpresent) 
+						   { 
+						     	projectpageobject.selectChoiceUserFromList(rolenname,singleuser);
+						     	test.log(Status.PASS, MarkupHelper.createLabel(singleuser +" : this user select successfully ", ExtentColor.GREEN));
+						   
+						     	Thread.sleep(500);
+						     	projectpageobject.clickOnSaveButtonOfUserForm();
+						     	test.log(Status.PASS, MarkupHelper.createLabel("click  on save button", ExtentColor.GREEN));
+						   
+						     	projectpageobject.clickOnOkBtnofSwal();
+						     	test.log(Status.PASS, MarkupHelper.createLabel("user added successfully", ExtentColor.BLUE));
+						   } else 
+						   {
+							   Thread.sleep(500);
+							   projectpageobject.clickOnCancelButtonOfUserForm();
+							   test.log(Status.PASS, MarkupHelper.createLabel(singleuser +" : this user not present in user list  ", ExtentColor.RED));
+						   }
+						}
+						
+						
+					} else 
+					{
+						test.log(Status.PASS, MarkupHelper.createLabel(" Login user not having add user permission ", ExtentColor.RED));
+					}
+					
+				} else 
+				{
+					test.log(Status.PASS, MarkupHelper.createLabel(rolenname + " : this user role  not present in user section ", ExtentColor.RED));
+				}
+				
+				
+			}else 
+			{
+				test.log(Status.PASS, MarkupHelper.createLabel(newprojectname + " : This project already created ", ExtentColor.RED));
+			}	
+			
+			}else 
+			{
+				test.log(Status.PASS, MarkupHelper.createLabel(departmentname + " : this department not exist ", ExtentColor.RED));	
+			}
 		
+	    } else 
+	    {
+	      test.log(Status.PASS, MarkupHelper.createLabel(" login user not having add project permission", ExtentColor.RED));
+	    }
 	}
-	
+		
 }

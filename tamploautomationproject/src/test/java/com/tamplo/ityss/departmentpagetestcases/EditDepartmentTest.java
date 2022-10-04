@@ -2,9 +2,6 @@ package com.tamplo.ityss.departmentpagetestcases;
 
 import java.io.IOException;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -41,32 +38,27 @@ public class EditDepartmentTest extends TestBase
 	@Test
 	public void editDepartmentTestCase() throws InterruptedException 
 	{
-		String departmentname = "DPT";
+		String departmentname = "automation testing";
+		String newdepartmentname = "automation testing department 1";
 		
-		if (deprtmenteditpageobject.isThreeDisplayOrNot(departmentname)) 
+		if (deprtmenteditpageobject.isThreeDisplayDotOrNot(departmentname)) 
 		{
 			
 			deprtmenteditpageobject.clickOnEditButtonOfDepartment(departmentname);
+			test.log(Status.PASS, MarkupHelper.createLabel("successfully click on edit button of department : " + departmentname, ExtentColor.GREEN));
 			
-			int length = departmentname.length();
+			deprtmenteditpageobject.clearDprtName(departmentname);
+			test.log(Status.PASS, MarkupHelper.createLabel("clear previous department name", ExtentColor.GREEN));
 			
-			WebElement rlrlrlr = driver.findElement(By.xpath("//textarea[@ng-model='uiData.transientDepartment.name']"));
-			for (int i = 1; i <=length; i++) 
-			{
-				rlrlrlr.sendKeys(Keys.BACK_SPACE);
-			}
-			
-			departmentpageobject.enterDepartmentNametxt("new update");
-			
-			Thread.sleep(500);
-			
-			driver.findElement(By.xpath("//li[@class='iconlistItem']//a[@class='iconlistItemLink']")).click();
-			
-			
-			
+			departmentpageobject.enterDepartmentNametxt(newdepartmentname);
+			test.log(Status.PASS, MarkupHelper.createLabel("department name update successfully as : " + newdepartmentname , ExtentColor.GREEN));
+	
+			deprtmenteditpageobject.clickOutsideToSaveDprt();
+			test.log(Status.PASS, MarkupHelper.createLabel("successfully save new department name " , ExtentColor.GREEN));
+		
 		} else 
 		{
-
+			test.log(Status.PASS, MarkupHelper.createLabel("User not have department edit permission please contact to admin" , ExtentColor.RED));
 		}
 		
 	}
