@@ -14,3 +14,10 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:
 log4j.appender.file.File=C:\\log\\logging.log
 # Set the append to false, overwrite
 log4j.appender.file.Append=false
+
+
+<dependency>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-simple</artifactId>
+  <version>1.6.2</version>
+</dependency>
