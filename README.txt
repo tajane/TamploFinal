@@ -1,23 +1,19 @@
-# Root logger option
-log4j.rootLogger=DEBUG, file
+# initialize root logger with level ERROR for stdout and fout
+log4j.rootLogger=ERROR,stdout,fout
+# set the log level for these components
+log4j.logger.com.endeca=INFO
+log4j.logger.com.endeca.itl.web.metrics=INFO
 
-# Direct log messages to a log file
-# configuration to print into file
-log4j.appender.file=org.apache.log4j.RollingFileAppender
-log4j.appender.file.MaxFileSize=1MB
-log4j.appender.file.MaxBackupIndex=10
-# Define the layout for file appender
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-#log4j.appender.file.layout.ConversionPattern=[%t] %-5p %c %x - %m%n
-log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
-# Set the name of the file
-log4j.appender.file.File=C:\\log\\logging.log
-# Set the append to false, overwrite
-log4j.appender.file.Append=false
+# add a ConsoleAppender to the logger stdout to write to the console
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+# use a simple message format
+log4j.appender.stdout.layout.ConversionPattern=%m%n
 
-
-<dependency>
-  <groupId>org.slf4j</groupId>
-  <artifactId>slf4j-simple</artifactId>
-  <version>1.6.2</version>
-</dependency>
+# add a FileAppender to the logger fout
+log4j.appender.fout=org.apache.log4j.FileAppender
+# create a log file
+log4j.appender.fout.File=crawl.log
+log4j.appender.fout.layout=org.apache.log4j.PatternLayout
+# use a more detailed message pattern
+log4j.appender.fout.layout.ConversionPattern=%p\t%d{ISO8601}\t%r\t%c\t[%t]\t%m%n
